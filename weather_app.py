@@ -1,4 +1,3 @@
-# weather_app.py
 import random
 import json
 
@@ -31,12 +30,43 @@ def load_weather_data():
 def add_city_weather():
     """Adds a new city's weather data."""
     city = input("Enter the city name: ")
+    if not city.strip():
+        print("City name cannot be empty.")
+        return
     data = load_weather_data()
     weather = generate_weather(city)
     data.append(weather)
     save_weather_data(data)
     print(f"Weather data for {city} added successfully.")
 
+def list_all_weather():
+    """Lists all stored weather data."""
+    data = load_weather_data()
+    if not data:
+        print("No weather data available.")
+        return
+    print("\nStored Weather Data:")
+    for index, weather in enumerate(data, start=1):
+        print(f"{index}. {weather['city']} - {weather['temperature']}°C - {weather['condition']}")
+
+def update_weather():
+    """Updates weather data for an existing city."""
+    data = load_weather_data()
+    if not data:
+        print("No weather data available to update.")
+        return
+    list_all_weather()
+    try:
+        index = int(input("Enter the number of the city to update: ")) - 1
+        if index < 0 or index >= len(data):
+            print("Invalid city number.")
+            return
+        updated_weather = generate_weather(data[index]['city'])
+        data[index] = updated_weather
+        save_weather_data(data)
+        print(f"Weather data for {data[index]['city']} updated successfully.")
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
 
 def main():
     while True:
