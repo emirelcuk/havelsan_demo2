@@ -82,29 +82,7 @@ def list_inventory():
         print(f"Product: {name}, Quantity: {details['quantity']}, Price: ${details['price']}")
 
 
-def main():
-    while True:
-        print("\nInventory Manager")
-        print("1. Add Product")
-        print("2. Update Product")
-        print("3. Delete Product")
-        print("4. List Inventory")
-        print("5. Exit")
-        choice = input("Enter your choice: ")
 
-        if choice == '1':
-            add_product()
-        elif choice == '2':
-            update_product()
-        elif choice == '3':
-            delete_product()
-        elif choice == '4':
-            list_inventory()
-        elif choice == '5':
-            print("Exiting the application.")
-            break
-        else:
-            print("Invalid choice. Please try again.")
 
 
 if __name__ == "__main__":
