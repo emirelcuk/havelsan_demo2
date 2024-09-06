@@ -20,6 +20,22 @@ def save_weather_data(data):
     with open(DATA_FILE, 'w') as file:
         json.dump(data, file, indent=4)
 
+def load_weather_data():
+    """Loads weather data from a JSON file."""
+    try:
+        with open(DATA_FILE, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+def add_city_weather():
+    """Adds a new city's weather data."""
+    city = input("Enter the city name: ")
+    data = load_weather_data()
+    weather = generate_weather(city)
+    data.append(weather)
+    save_weather_data(data)
+    print(f"Weather data for {city} added successfully.")
 
 def list_all_weather():
     """Lists weather data for all cities."""

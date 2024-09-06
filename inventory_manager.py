@@ -58,7 +58,28 @@ def update_product():
         print(f"Product {name} not found in the inventory.")
 
 
+def delete_product():
+    """Deletes a product from the inventory."""
+    name = input("Enter the product name to delete: ")
+    inventory = load_inventory()
 
+    if name in inventory:
+        del inventory[name]
+        save_inventory(inventory)
+        print(f"Product {name} deleted successfully.")
+    else:
+        print(f"Product {name} not found in the inventory.")
+
+
+def list_inventory():
+    """Lists all products in the inventory."""
+    inventory = load_inventory()
+    if not inventory:
+        print("No products in the inventory.")
+        return
+    print("\nCurrent Inventory:")
+    for name, details in inventory.items():
+        print(f"Product: {name}, Quantity: {details['quantity']}, Price: ${details['price']}")
 
 
 
